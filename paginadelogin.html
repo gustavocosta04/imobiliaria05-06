@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sudoeste Quadra 500</title>
+    <link rel="stylesheet" href="styles-login.css">
+    
+    <script>
+        function forgotPassword() {
+            var email = document.getElementById("email").value;
+            if (email !== "") {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "reset_password.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            alert(xhr.responseText); // Exibe a resposta do servidor
+                        } else {
+                            alert("Erro ao processar a solicitação.");
+                        }
+                    }
+                };
+                xhr.send("email=" + encodeURIComponent(email));
+            } else {
+                alert("Por favor, insira seu email.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <form class="login-form">
+            <h2>Login</h2>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+            <div class="form-footer">
+                <a href="#" class="forgot-password" onclick="forgotPassword()">Esqueci a senha</a>
+                <button type="submit" class="login-button" onclick="redirectToIndex()">Login</button>
+            </div>
+
+            <script>
+                function redirectToIndex() {
+                    // Redirecionar para indexl.html
+                    window.location.href = "indexl.html";
+                }
+            </script>
+
+        </form>
+
+        <div class="signup-link">
+            <p>Ainda não tem uma conta?</p>
+            <a href="paginaderegistro.html">Cadastre-se aqui</a>
+        </div>
+    </div>
+</body>
+</html>
